@@ -1,0 +1,63 @@
+/* CSS styles for the login component */
+h2 {
+    font-size: 30px;
+    text-align: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 700;
+    margin-top: 30px;
+    margin-bottom: 0%;
+}
+
+.header_home {
+    background-color: #d9d9d9;
+    color: #8f17fa;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+main img {
+    margin-top: 0px;
+    width: 75%;
+    margin-bottom: 30px;
+}
+
+main p {
+    margin-top: 0px;
+    color: #8f17fa;
+    font-size: 10px;
+    position: relative;
+    bottom: 5px;
+    cursor: pointer;
+}
+
+.btn {
+    width: 150px;
+    height: 25px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px 10px;
+}
+
+.btn_primary {
+    background-color: #ffffff;
+    color: #8f17fa;
+    border-color: #8f17fa;
+}
+
+.btn_secondary {
+    background-color: #8f17fa;
+    color: #ffffff;
+    border-color: #8f17fa;
+}
+
+.btn_primary:hover {
+    background-color: #8f17fa;
+    color: #ffffff;
+    border-color: #8f17fa;
+}
+
+.btn_secondary:hover {
+    background-color: #ffffff;
+    color: #8f17fa;
+    border-color: #8f17fa;
+}

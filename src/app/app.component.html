@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="../assets/logo2.jpg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jobtail</title>
+  </head>
+
+  <body ng-controller="LoginController">
+    <header class="container header_home">
+      <span id="logo">
+        <img src="../assets/logo3.png" alt="logo" />
+        <h1 class="logo">Jobtail</h1>
+      </span>
+      <div class="container header_home">
+        <a href="./dashboard.html" ng-click="login()"
+          ><button type="button" class="btn btn_primary" id="Login">
+            Login
+          </button></a
+        >
+        <button type="button" class="btn btn_secondary" ng-click="signUp()">
+          Sign Up
+        </button>
+      </div>
+    </header>
+    <main class="container">
+      <div class="container">
+        <h2>Stay on your applications’ tail</h2>
+        <img src="../assets/mac.png" alt="job search" />
+      </div>
+      <div class="container">
+        <button type="button" class="btn btn_secondary" ng-click="signUp()">
+          Sign up for free
+        </button>
+        <p ng-click="login()">Login to your account</p>
+      </div>
+    </main>
+    <script src="angular.min.js"></script>
+    <script>
+      var app = angular.module("myApp", []);
+      app.controller("LoginController", function ($scope) {
+        $scope.login = function () {
+          // login logic here
+        };
+        $scope.signUp = function () {
+          // signup logic here
+        };
+      });
+    </script>
+  </body>
+</html>
