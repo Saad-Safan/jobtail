@@ -15,6 +15,9 @@ export class HomeComponent {
       appState: {
         target: '/dashboard',
       },
+      authorizationParams: {
+        redirect_uri: 'http://localhost:4200/dashboard',
+      }
     });
   }
 
@@ -23,7 +26,10 @@ export class HomeComponent {
     appState: {
       target: '/profile',
     },
-    //screen_hint: '/dashboard',
+    authorizationParams: {
+      screen_hint: 'signup',
+      redirect_uri: 'http://localhost:4200/dashboard',
+    }
   });
   }
 }
