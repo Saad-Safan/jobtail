@@ -3,8 +3,15 @@
     <img [src]="'./assets/logo3.png'" alt="logo" />
     <h1 class="logo">Jobtail</h1>
   </span>
-  <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated"
-    ><div class="container header_home">
+  <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated">
+    <div class="container header_home">
+      <button type="button" class="btn btn_secondary" (click)="handleLogout()">
+        Logout
+      </button>
+    </div>
+  </ng-container>
+  <ng-template #unAuthenticated>
+    <div class="container header_home">
       <button
         type="button"
         class="btn btn_primary"
@@ -15,13 +22,6 @@
       </button>
       <button type="button" class="btn btn_secondary" (click)="handleSignUp()">
         Sign Up
-      </button>
-    </div></ng-container
-  >
-  <ng-template #unAuthenticated>
-    <div class="container header_home">
-      <button type="button" class="btn btn_secondary" (click)="handleLogout()">
-        Logout
       </button>
     </div>
   </ng-template>

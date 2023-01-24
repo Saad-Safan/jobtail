@@ -4,6 +4,9 @@
     <h1 class="logo">Jobtail</h1>
   </span>
   <div class="container header_home">
+    <h5 class="header" *ngIf="auth.user$ | async as user">
+      Hello, {{ user.name }}!
+    </h5>
     <button type="button" class="btn btn_primary" (click)="handleLogout()">
       Logout
     </button>

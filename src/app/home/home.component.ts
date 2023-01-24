@@ -10,10 +10,10 @@ import { AuthService } from '@auth0/auth0-angular';
 })
 export class HomeComponent {
 
-  isAuthenticated$ = this.auth.isAuthenticated$
-
   constructor(public auth: AuthService, @Inject(DOCUMENT) private doc?: Document) {}
   
+  isAuthenticated$ = this.auth.isAuthenticated$
+
   handleLogin(): void {
     this.auth.loginWithRedirect({
       appState: {
