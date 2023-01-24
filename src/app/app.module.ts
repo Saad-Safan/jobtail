@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AuthModule } from '@auth0/auth0-angular';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -16,6 +18,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    DragDropModule,
+    NgbModule,
 
     // AuthModule
     AuthModule.forRoot({

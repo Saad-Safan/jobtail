@@ -3,19 +3,28 @@
     <img [src]="'./assets/logo3.png'" alt="logo" />
     <h1 class="logo">Jobtail</h1>
   </span>
-  <div class="container header_home">
-    <button
-      type="button"
-      class="btn btn_primary"
-      id="Login"
-      (click)="handleLogin()"
-    >
-      Login
-    </button>
-    <button type="button" class="btn btn_secondary" (click)="handleSignUp()">
-      Sign Up
-    </button>
-  </div>
+  <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated"
+    ><div class="container header_home">
+      <button
+        type="button"
+        class="btn btn_primary"
+        id="Login"
+        (click)="handleLogin()"
+      >
+        Login
+      </button>
+      <button type="button" class="btn btn_secondary" (click)="handleSignUp()">
+        Sign Up
+      </button>
+    </div></ng-container
+  >
+  <ng-template #unAuthenticated>
+    <div class="container header_home">
+      <button type="button" class="btn btn_secondary" (click)="handleLogout()">
+        Logout
+      </button>
+    </div>
+  </ng-template>
 </header>
 <main class="container">
   <div class="container">

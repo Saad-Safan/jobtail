@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 
 @Component({
@@ -8,8 +9,11 @@ import { AuthService } from '@auth0/auth0-angular';
   template: '<button (click)="handleLogin()">Log in</button><button (click)="handleSignUp()">Sign up</button>',
 })
 export class HomeComponent {
-  constructor(public auth: AuthService) {}
 
+  isAuthenticated$ = this.auth.isAuthenticated$
+
+  constructor(public auth: AuthService, @Inject(DOCUMENT) private doc?: Document) {}
+  
   handleLogin(): void {
     this.auth.loginWithRedirect({
       appState: {
@@ -31,5 +35,9 @@ export class HomeComponent {
       redirect_uri: 'http://localhost:4200/dashboard',
     }
   });
+  }
+
+  handleLogout(): void {
+    this.auth!.logout({ returnTo: this.doc!.location.origin });
   }
 }
