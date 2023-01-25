@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -8,16 +9,21 @@ import { AuthService } from '@auth0/auth0-angular';
   styleUrls: ['./home.component.css'],
   template: '<button (click)="handleLogin()">Log in</button><button (click)="handleSignUp()">Sign up</button>',
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
-  constructor(public auth: AuthService, @Inject(DOCUMENT) private doc?: Document) {}
+  constructor(public auth: AuthService, public router: Router, @Inject(DOCUMENT) private doc?: Document) {}
+
   
+  // Reroute to dashboard if user is already logged in
+  ngOnInit(): void {
+  }
+
   isAuthenticated$ = this.auth.isAuthenticated$
 
   handleLogin(): void {
     this.auth.loginWithRedirect({
       appState: {
-        target: '/dashboard',
+        target: 'http://localhost:4200/dashboard',
       },
       authorizationParams: {
         redirect_uri: 'http://localhost:4200/dashboard',
@@ -28,7 +34,7 @@ export class HomeComponent {
   handleSignUp(): void {
     this.auth.loginWithRedirect({
     appState: {
-      target: '/profile',
+      target: 'http://localhost:4200/dashboard',
     },
     authorizationParams: {
       screen_hint: 'signup',
@@ -38,6 +44,6 @@ export class HomeComponent {
   }
 
   handleLogout(): void {
-    this.auth!.logout({ returnTo: this.doc!.location.origin });
+    this.auth!.logout();
   }
 }

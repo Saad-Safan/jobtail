@@ -1,24 +1,36 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { AuthService } from '@auth0/auth0-angular';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
 
-  constructor(public auth?: AuthService, private modalService?: NgbModal, @Inject(DOCUMENT) private doc?: Document) {
+  authStatus: string = "Not logged in";
+
+  constructor(public auth: AuthService, private modalService: NgbModal, @Inject(DOCUMENT) private doc: Document, public router: Router) {
     this.modalService = modalService;
+  }
+
+  ngOnInit(): void {
     
   }
 
   public open(modal: any): void {
     this.modalService!.open(modal);
   }
+
+  user$ = this.auth.user$;
+  // Get token 
+  token$ = this.auth.idTokenClaims$;
+  // Get token['sub']
+  sub$: string = "";
 
   // TODO: Replace with actual data
   // Hook up to MongoDB
@@ -29,7 +41,7 @@ export class DashboardComponent {
   declinedJobs: any[] = [];
 
   handleLogout(): void {
-    this.auth!.logout({ returnTo: this.doc!.location.origin });
+    this.auth!.logout({  });
   }
 
   addNewJob(): void {

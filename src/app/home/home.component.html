@@ -3,13 +3,16 @@
     <img [src]="'./assets/logo3.png'" alt="logo" />
     <h1 class="logo">Jobtail</h1>
   </span>
-  <ng-container *ngIf="isAuthenticated$ | async; else unAuthenticated">
+  <div *ngIf="isAuthenticated$ | async; else unAuthenticated">
     <div class="container header_home">
+      <button type="button" class="btn btn_primary" routerLink="/dashboard">
+        To Dashboard
+      </button>
       <button type="button" class="btn btn_secondary" (click)="handleLogout()">
         Logout
       </button>
     </div>
-  </ng-container>
+  </div>
   <ng-template #unAuthenticated>
     <div class="container header_home">
       <button
@@ -31,10 +34,11 @@
     <h2>Stay on your applications’ tail</h2>
     <img [src]="'./assets/mac.png'" alt="job search" />
   </div>
-  <div class="container">
+  <div *ngIf="isAuthenticated$ | async; else unAuthenticated2"></div>
+  <ng-template #unAuthenticated2 class="container">
     <button type="button" class="btn btn_secondary" (click)="handleSignUp()">
       Sign up for free
     </button>
     <p (click)="handleLogin()">Login to your account</p>
-  </div>
+  </ng-template>
 </main>

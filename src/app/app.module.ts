@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { AuthModule } from '@auth0/auth0-angular';
+import { AuthGuard, AuthModule } from '@auth0/auth0-angular';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -30,7 +30,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
       },
     }),
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
