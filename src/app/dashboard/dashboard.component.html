@@ -8,7 +8,7 @@
     <button type="button" class="btn btn_primary" (click)="handleLogout()">
       Logout
     </button>
-  
+  </div>
 </header>
 
 <main cdkDropListGroup>
@@ -20,7 +20,7 @@
   >
     <h2>Wishlist</h2>
     <div
-      (click)="addNewJob()"
+      (click)="openAddEditJobForm()"
       id="addNew"
       data-bs-toggle="modal"
       data-bs-target="#form"

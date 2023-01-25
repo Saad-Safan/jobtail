@@ -4,6 +4,9 @@ import { AuthService } from '@auth0/auth0-angular';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JobAddEditComponent } from 'src/app/job-add-edit/job-add-edit.component';
+import {MatDialog} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +17,16 @@ export class DashboardComponent implements OnInit {
 
   authStatus: string = "Not logged in";
 
-  constructor(public auth: AuthService, private modalService: NgbModal, @Inject(DOCUMENT) private doc: Document, public router: Router) {
+  constructor(private _dialog: MatDialog, public auth: AuthService, private modalService: NgbModal, @Inject(DOCUMENT) private doc: Document, public router: Router) {
     this.modalService = modalService;
   }
+
+  
+
+   openAddEditJobForm() {
+    this._dialog.open(JobAddEditComponent);
+    }
+   
 
   ngOnInit(): void {
     
