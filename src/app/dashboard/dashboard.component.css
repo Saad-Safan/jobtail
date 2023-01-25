@@ -59,6 +59,7 @@ header {
 	display: flex;
 	padding: 0 0px;
 	z-index: 1;
+	height: 70px;
 }
 
 
