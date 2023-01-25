@@ -11,11 +11,9 @@ export class AppComponent {
   title = 'jobtail';
 
   constructor(private _dialog: MatDialog) { }
-  
-
    openAddEditJobForm() {
     this._dialog.open(JobAddEditComponent);
-    }
+  }
    
 }
  

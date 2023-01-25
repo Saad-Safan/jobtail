@@ -4,10 +4,14 @@
     <h1 class="logo">Jobtail</h1>
   </span>
   <div class="">
-    <h4 *ngIf="user$ | async as user">Hello, {{ user.name }}</h4>
-    <button type="button" class="btn btn_primary" (click)="handleLogout()">
-      Logout
-    </button>
+    <!-- <div>
+      <h4 *ngIf="user$ | async as user">Hello, {{ user.name }}</h4>
+    </div> -->
+    <div>
+      <button type="button" class="btn btn_primary" (click)="handleLogout()">
+        Logout
+      </button>
+    </div>
   </div>
 </header>
 
