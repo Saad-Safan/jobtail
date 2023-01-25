@@ -12,7 +12,14 @@ h2 {
 	color: #8f17fa;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin: 0;
+	padding: 0;
+	justify-content: space-around;
+	align-items: center;
+	display: flex;
+	padding: 0 0px;
 }
+
 
 main img {
 	margin-top: 0px;
@@ -26,11 +33,12 @@ main p {
 	position: relative;
 	bottom: 5px;
 	cursor: pointer;
+	font-size: 14px;
 }
 
 .btn {
 	width: 150px;
-	height: 25px;
+	height: 40px;
 	border-radius: 5px;
 	cursor: pointer;
 	margin: 10px 10px;
