@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 
 const JobSchema = mongoose.Schema({
-  jobId: { type: String },
   company: { type: String },
   title: { type: String },
   description: { type: String },
@@ -10,7 +9,7 @@ const JobSchema = mongoose.Schema({
 });
 
 const UserSchema = mongoose.Schema({
-  user: { type: String },
+  user: { type: String, unique: true },
   jobs: [JobSchema],
 });
 

@@ -14,7 +14,7 @@
             <div class="row">
                 <mat-form-field appearance="outline">
                     <mat-label>Job Title</mat-label>
-                    <input matInput placeholder="Ex. Software Engineer" formControlName="Title">
+                    <input matInput placeholder="Ex. Software Engineer" formControlName="title">
                 </mat-form-field>
             </div>
         <div class="row">
@@ -26,14 +26,14 @@
             <mat-form-field appearance="outline">
                 <mat-label>Job Description </mat-label>
             
-                <textarea matInput formControlName="Description" class="form-control" id="textarea" cols="30" rows="5"></textarea>
+                <textarea matInput formControlName="description" class="form-control" id="textarea" cols="30" rows="5"></textarea>
                 <!-- <input matInput type="text" placeholder="Ex. Technical" > -->
             </mat-form-field>
 
             <mat-form-field appearance="outline">
                 <mat-label>Status</mat-label>
-                <mat-select formControlName="Status">
-                    <mat-option *ngFor="let val of Status" [value]="val">{{val}}
+                <mat-select formControlName="status">
+                    <mat-option *ngFor="let val of status" [value]="val">{{val}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>

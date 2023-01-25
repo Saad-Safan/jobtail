@@ -36,9 +36,9 @@
     <div class="job-card" *ngFor="let job of wishlistJobs" cdkDrag>
       <div class="card" cdkDrag>
         <p class="h6 mb-0 pb-0">Company:</p>
-        <p class="h3">{{ job.employer }}</p>
+        <p class="h3">{{ job.company }}</p>
         <p class="h6 mb-0 pb-0">Job Title:</p>
-        <span class="h4">{{ job.name }}</span>
+        <span class="h4">{{ job.title }}</span>
         <span class="h6"></span>
         <p class="h6 mb-0 pb-0">Job Description:</p>
         <p>{{ job.description }}</p>
@@ -50,7 +50,7 @@
             data-bs-target="#form"
             class="h6 fas fa-edit"
           ></i>
-          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+          <i (click)="deleteTask(job)" class="fas h6 fa-trash-alt"></i>
         </span>
       </div>
     </div>
@@ -66,9 +66,9 @@
     <div class="job-card" *ngFor="let job of appliedJobs" cdkDrag>
       <div class="card" cdkDrag>
         <p class="h6 mb-0 pb-0">Company:</p>
-        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class="h3 pt-0 mt-0">{{ job.company }}</p>
         <p class="h6 mb-0 pb-0">Job Title:</p>
-        <span class="h4">{{ job.name }}</span>
+        <span class="h4">{{ job.title }}</span>
         <span class="h6"></span>
         <p class="h6 mb-0 pb-0">Job Description:</p>
         <p>{{ job.description }}</p>
@@ -80,7 +80,7 @@
             data-bs-target="#form"
             class="h6 fas fa-edit"
           ></i>
-          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+          <i (click)="deleteTask(job)" class="fas h6 fa-trash-alt"></i>
         </span>
       </div>
     </div>
@@ -96,9 +96,9 @@
     <div class="job-card" *ngFor="let job of interviewJobs" cdkDrag>
       <div class="card" cdkDrag>
         <p class="h6 mb-0 pb-0">Company:</p>
-        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class="h3 pt-0 mt-0">{{ job.company }}</p>
         <p class="h6 mb-0 pb-0">Job Title:</p>
-        <span class="h4">{{ job.name }}</span>
+        <span class="h4">{{ job.title }}</span>
         <span class="h6"></span>
         <p class="h6 mb-0 pb-0">Job Description:</p>
         <p>{{ job.description }}</p>
@@ -110,7 +110,7 @@
             data-bs-target="#form"
             class="h6 fas fa-edit"
           ></i>
-          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+          <i (click)="deleteTask(job)" class="fas h6 fa-trash-alt"></i>
         </span>
       </div>
     </div>
@@ -126,9 +126,9 @@
     <div class="job-card" *ngFor="let job of offerJobs" cdkDrag>
       <div class="card" cdkDrag>
         <p class="h6 mb-0 pb-0">Company:</p>
-        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class="h3 pt-0 mt-0">{{ job.company }}</p>
         <p class="h6 mb-0 pb-0">Job Title:</p>
-        <span class="h4">{{ job.name }}</span>
+        <span class="h4">{{ job.title }}</span>
         <span class="h6"></span>
         <p class="h6 mb-0 pb-0">Job Description:</p>
         <p>{{ job.description }}</p>
@@ -140,7 +140,7 @@
             data-bs-target="#form"
             class="h6 fas fa-edit"
           ></i>
-          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+          <i (click)="deleteTask(job)" class="fas h6 fa-trash-alt"></i>
         </span>
       </div>
     </div>
@@ -156,9 +156,9 @@
     <div class="job-card" *ngFor="let job of declinedJobs" cdkDrag>
       <div class="card" cdkDrag>
         <p class="h6 mb-0 pb-0">Company:</p>
-        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class="h3 pt-0 mt-0">{{ job.company }}</p>
         <p class="h6 mb-0 pb-0">Job Title:</p>
-        <span class="h4">{{ job.name }}</span>
+        <span class="h4">{{ job.title }}</span>
         <span class="h6"></span>
         <p class="h6 mb-0 pb-0">Job Description:</p>
         <p>{{ job.description }}</p>
@@ -170,7 +170,7 @@
             data-bs-target="#form"
             class="h6 fas fa-edit"
           ></i>
-          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+          <i (click)="deleteTask(job)" class="fas h6 fa-trash-alt"></i>
         </span>
       </div>
     </div>

@@ -1,3 +1,4 @@
+const { request } = require("express");
 const express = require("express");
 const { restart } = require("nodemon");
 const router = express.Router();
@@ -25,7 +26,7 @@ router.get(`/getOne/:user`, async (req, res) => {
 router.post("/addUser", async (req, res) => {
   const userJob = new UserJobs({
     user: req.body.user,
-    jobs: req.body.jobs,
+    jobs: [],
   });
 
   try {
@@ -44,7 +45,37 @@ router.post("/addJob/:user", async (req, res) => {
   );
   // save
   try {
-    const savedPost = await userJob[0].save();
+    const savedPost = await userJob.save();
+    res.status(200).json(savedPost);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+router.post("/updateJob/:user", async (req, res) => {
+  // find by user and update
+  const userJob = await UserJobs.findOneAndUpdate(
+    { user: req.params.user },
+    { $set: { jobs: req.body.jobs } }
+  );
+  // save
+  try {
+    const savedPost = await userJob.save();
+    res.status(200).json(savedPost);
+  } catch (error) {
+    res.json({ message: error });
+  }
+});
+
+router.post("/deleteJob/:user", async (req, res) => {
+  // find by user and update
+  const userJob = await UserJobs.findOneAndUpdate(
+    { user: req.params.user, jobs: { $elemMatch: { _id: req.body.jobs._id } } },
+    { $pull: { jobs: { _id: req.body.jobs._id } } }
+  );
+  // save
+  try {
+    const savedPost = await userJob.save();
     res.status(200).json(savedPost);
   } catch (error) {
     res.json({ message: error });
