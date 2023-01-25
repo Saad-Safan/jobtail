@@ -1,0 +1,105 @@
+<header  class="container-fluid">
+  <span id="logo">
+    <img [src]="'./assets/logo.png'" alt="logo" />
+    <h1 class="logo">Jobtail</h1>
+  </span>
+  <div class="">
+
+    <button type="button" class="btn btn_primary " (click)="handleLogout()">
+      Logout
+    </button>
+  </div>
+</header>
+
+<main cdkDropListGroup>
+  <div class="category" cdkDropList [cdkDropListData]="wishlistJobs" (cdkDropListDropped)="drop($event)">
+    <h2>Wishlist</h2>
+    <div (click)="addNewJob()" id="addNew" data-bs-toggle="modal" data-bs-target="#form">
+      <span>Add New Job</span>
+      <i class="fas fa-plus"></i>
+    </div>
+
+    <div class=" job-card" *ngFor="let job of wishlistJobs" cdkDrag>
+
+      <div class=" card" cdkDrag>
+        <p class="h6 mb-0 pb-0" >Company:</p>
+        <p class="h3 ">{{ job.employer }}</p>
+        <p class=" h6 mb-0 pb-0">Job Title:</p>
+        <span class="h4">{{ job.name }}</span>
+        <span class="h6"></span>
+        <p class=" h6 mb-0 pb-0">Job Description:</p>
+        <p>{{ job.description}}</p>
+
+        <span class="options">
+          <i onclick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class=" h6 fas fa-edit"></i>
+          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="category" cdkDropList [cdkDropListData]="appliedJobs" (cdkDropListDropped)="drop($event)">
+    <h2>Applied</h2>
+    <div class="job-card" *ngFor="let job of appliedJobs" cdkDrag>
+      <div class=" card" cdkDrag>
+        <p class="h6 mb-0 pb-0" >Company:</p>
+        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class=" h6 mb-0 pb-0">Job Title:</p>
+        <span class="h4">{{ job.name }}</span>
+        <span class="h6"></span>
+        <p class=" h6 mb-0 pb-0">Job Description:</p>
+        <p>{{ job.description}}</p>
+
+        <span class="options">
+          <i onclick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class=" h6 fas fa-edit"></i>
+          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="category" cdkDropList [cdkDropListData]="interviewJobs" (cdkDropListDropped)="drop($event)">
+    <h2>Interview</h2>
+    <div class="job-card" *ngFor="let job of interviewJobs" cdkDrag>
+      <div class=" card" cdkDrag>
+        <p class="h6 mb-0 pb-0" >Company:</p>
+        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class=" h6 mb-0 pb-0">Job Title:</p>
+        <span class="h4">{{ job.name }}</span>
+        <span class="h6"></span>
+        <p class=" h6 mb-0 pb-0">Job Description:</p>
+        <p>{{ job.description}}</p>
+
+        <span class="options">
+          <i onclick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class=" h6 fas fa-edit"></i>
+          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="category" cdkDropList [cdkDropListData]="declinedJobs" (cdkDropListDropped)="drop($event)">
+    <h2>Declined</h2>
+    <div class="job-card" *ngFor="let job of declinedJobs" cdkDrag>
+      <div class=" card" cdkDrag>
+        <p class="h6 mb-0 pb-0" >Company:</p>
+        <p class="h3 pt-0 mt-0">{{ job.employer }}</p>
+        <p class=" h6 mb-0 pb-0">Job Title:</p>
+        <span class="h4">{{ job.name }}</span>
+        <span class="h6"></span>
+        <p class=" h6 mb-0 pb-0">Job Description:</p>
+        <p>{{ job.description}}</p>
+
+        <span class="options">
+          <i onclick="editTask(this)" data-bs-toggle="modal" data-bs-target="#form" class=" h6 fas fa-edit"></i>
+          <i onclick="deleteTask(this);" class="fas h6 fa-trash-alt"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+</main>
