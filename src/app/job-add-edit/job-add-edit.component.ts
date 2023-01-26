@@ -53,12 +53,14 @@ export class JobAddEditComponent {
   }
 
   ngOnInit(): void {
+    this.sub = this.getSub();
     this.empForm.patchValue(this.data);
   }
 
   sub: any = null;
 
   onFormSubmit() {
+    this.sub = this.getSub();
     if (this.empForm.valid) {
       console.log(this.empForm.value);
 
@@ -84,8 +86,14 @@ export class JobAddEditComponent {
       // Close the component
       this._dialogRef.close(true);
 
-      // Reload the page
-      window.location.reload();
+      this.auth.loginWithRedirect({
+        appState: {
+          target: 'http://localhost:4200/dashboard',
+        },
+        authorizationParams: {
+          redirect_uri: 'http://localhost:4200/dashboard',
+        }
+      });
 
     //   if (this.data) {
     //     this._empService
