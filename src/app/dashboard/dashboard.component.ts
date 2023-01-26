@@ -4,7 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JobAddEditComponent } from 'src/app/job-add-edit/job-add-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import axios from 'axios';
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   sub : any = null;
   jobs : any[] = [];
   user$ = this.auth.user$;
-  wishlistJobs: any[] = [{ title:"HiWi",company:"RWTH",description:"Entwicklung einer Microservice-Infrastruktur zur kontinuierlichen"}];
+  wishlistJobs: any[] = [];
   appliedJobs: any[] = [];
   interviewJobs: any[] = [];
   offerJobs: any[] = [];
@@ -50,6 +50,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.sub = this.getSub();
     this.getSub().subscribe((val) => {
       // Try and find user in DB
     axios.get('http://localhost:3000/api/jobs/getOne/' + val ).then((res) => {
