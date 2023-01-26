@@ -4,6 +4,7 @@ import { AuthService } from '@auth0/auth0-angular';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import axios from 'axios';
+import { Observable, Subject } from 'rxjs';
 
 
 @Component({
@@ -38,6 +39,19 @@ export class JobAddEditComponent {
     });
   }
 
+  getSub(): Observable<string> {
+    var subject = new Subject<string>();
+    // Token
+    this.auth.idTokenClaims$.subscribe((val) => {
+      if (val) {
+        this.sub = val['sub'];
+        subject.next(this.sub);
+      }
+    });
+
+    return subject.asObservable();
+  }
+
   ngOnInit(): void {
     this.empForm.patchValue(this.data);
   }
@@ -48,16 +62,7 @@ export class JobAddEditComponent {
     if (this.empForm.valid) {
       console.log(this.empForm.value);
 
-      // Get sub from token converted to string
-      this.sub = this.auth.idTokenClaims$.subscribe((val) => {
-        this.sub = val?['sub'] : null
-      });
-
-      if (!this.sub) {
-        return;
-      }
-
-      this.sub = this.sub.toString();
+      
 
       // Make an API call to add or update the user's job
       // Use a custom body object
@@ -70,8 +75,11 @@ export class JobAddEditComponent {
         }
       };
 
-      // Make an API call to add or update the user's job
-      axios.post(`http://localhost:3000/api/jobs/addJob/${"Marawan"}`, body)
+      this.getSub().subscribe((val) => {
+        // Make an API call to add or update the user's job
+      console.log(val)
+      axios.post("http://localhost:3000/api/jobs/addJob/" + val, body)
+      });
 
       // Close the component
       this._dialogRef.close(true);

@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { JobAddEditComponent } from 'src/app/job-add-edit/job-add-edit.component';
 import { MatDialog } from '@angular/material/dialog';
 import axios from 'axios';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,45 +36,41 @@ export class DashboardComponent implements OnInit {
     this._dialog.open(JobAddEditComponent);
     }
    
-  getSub(): string {
-     // Get sub from token converted to string
-     this.sub = this.auth.idTokenClaims$.subscribe((val) => {
-      this.sub = val?['sub'] : null
+  getSub(): Observable<string> {
+    var subject = new Subject<string>();
+    // Token
+    this.auth.idTokenClaims$.subscribe((val) => {
+      if (val) {
+        this.sub = val['sub'];
+        subject.next(this.sub);
+      }
     });
 
-    console.log(this.sub)
-
-    if (!this.sub) {
-      return "";
-    }
-
-    this.sub = this.sub.toString();
-    this.sub = "Marawan"
-    return this.sub;
+    return subject.asObservable();
   }
 
   ngOnInit(): void {
-    this.sub = this.getSub();
-
-    // Try and find user in DB
-    axios.get('http://localhost:3000/api/jobs/getOne/' + this.sub ).then((res) => {
+    this.getSub().subscribe((val) => {
+      // Try and find user in DB
+    axios.get('http://localhost:3000/api/jobs/getOne/' + val ).then((res) => {
       // If user found, get jobs
       this.jobs = res.data[0].jobs;
       this.updateJobs(this.jobs);
     }).catch((err) => {
-      // If user not found, create new user
-      axios.post('http://localhost:3000/api/jobs/addUser', { user: this.sub }).then((res) => {
-        // Get user's jobs
-        axios.get('http://localhost:3000/api/jobs/getOne/' + this.sub ).then((res) => {
-          this.jobs = res.data[0].jobs;
-          this.updateJobs(this.jobs);
+        // If user not found, create new user
+        axios.post('http://localhost:3000/api/jobs/addUser', { user: val }).then((res) => {
+          console.log(val)
+          axios.get('http://localhost:3000/api/jobs/getOne/' + val ).then((res) => {
+            this.jobs = res.data[0].jobs;
+            this.updateJobs(this.jobs);
+          }).catch((err) => {
+            // If user not found, error
+            console.log("user not found", err);
+          });
         }).catch((err) => {
-          // If user not found, error
-          console.log(err);
+          // If user not created, error
+          console.log("user not created", err);
         });
-      }).catch((err) => {
-        // If user not created, error
-        console.log(err);
       });
     });
   }
@@ -103,17 +100,17 @@ export class DashboardComponent implements OnInit {
   }
 
   deleteTask(job: any): void {
-    this.sub = this.getSub();
     // Remove job from user's jobs
-    axios.post('http://localhost:3000/api/jobs/deleteJob/' + this.sub, { jobs: job }).then((res) => {
+    this.getSub().subscribe((val) => {
+      axios.post('http://localhost:3000/api/jobs/deleteJob/' + val, { jobs: job }).then((res) => {
       console.log(res.data);
+      // Reload page
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/dashboard']);
+      });
     }).catch((err) => {
       console.log(err);
     });
-
-    // Reload page
-    this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-      this.router.navigate(['/dashboard']);
     });
   }
 
@@ -130,6 +127,7 @@ export class DashboardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
+    var new_status: string = "";
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -139,9 +137,33 @@ export class DashboardComponent implements OnInit {
         event.previousIndex,
         event.currentIndex,
       );
+      switch (event.container.id) {
+        case "cdk-drop-list-0":
+          new_status = "Wishlist";
+          break;
+        case "cdk-drop-list-1":
+          new_status = "Applied";
+          break;
+        case "cdk-drop-list-2":
+          new_status = "Interview";
+          break;
+        case "cdk-drop-list-3":
+          new_status = "Offer";
+          break;
+        case "cdk-drop-list-4":
+          new_status = "Declined";
+          break;
+        default:
+          break;
+      }
+      // Update job status
+      this.getSub().subscribe((val) => {
+        axios.post('http://localhost:3000/api/jobs/updateJobStatus/' + val, { jobs: event.container.data[0], status: new_status }).then((res) => {
+        console.log(res.data);
+      }).catch((err) => {
+        console.log(err);
+      });
+      });
     }
-
   }
-
-
 }

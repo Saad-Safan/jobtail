@@ -19,7 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-
+import { User } from '@auth0/auth0-angular';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';

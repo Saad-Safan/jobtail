@@ -26,7 +26,7 @@ router.get(`/getOne/:user`, async (req, res) => {
 router.post("/addUser", async (req, res) => {
   const userJob = new UserJobs({
     user: req.body.user,
-    jobs: [],
+    jobs: [{}],
   });
 
   try {
@@ -52,11 +52,12 @@ router.post("/addJob/:user", async (req, res) => {
   }
 });
 
-router.post("/updateJob/:user", async (req, res) => {
+router.post("/updateJobStatus/:user", async (req, res) => {
   // find by user and update
+  console.log(req.body.status);
   const userJob = await UserJobs.findOneAndUpdate(
-    { user: req.params.user },
-    { $set: { jobs: req.body.jobs } }
+    { user: req.params.user, jobs: { $elemMatch: { _id: req.body.jobs._id } } },
+    { $set: { "jobs.$.status": req.body.status } }
   );
   // save
   try {
