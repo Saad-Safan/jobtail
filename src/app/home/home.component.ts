@@ -16,6 +16,11 @@ export class HomeComponent implements OnInit {
   
   // Reroute to dashboard if user is already logged in
   ngOnInit(): void {
+    this.auth.isAuthenticated$.subscribe((val) => {
+      if (val) {
+        this.handleLogin();
+      }
+    });
   }
 
   isAuthenticated$ = this.auth.isAuthenticated$
